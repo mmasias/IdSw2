@@ -31,4 +31,6 @@ El método central del diseño es `solicitarBeca(EvaluadorBecas evaluador)`, pre
 
 Este invariante no es una convención. Es la condición bajo la cual `Universidad` puede depender únicamente de `Alumno` sin saber nada de sus subtipos.
 
+Este mecanismo - una jerarquía que delega la operación en otra mediante doble despacho - tiene nombre: **Visitor**. El contrato que acabamos de definir es exactamente lo que el patrón exige a sus elementos. Artículo propio pendiente.
+
 > Sigue en [OCP07](../OCP07/README.md)

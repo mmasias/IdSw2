@@ -1,0 +1,25 @@
+@startuml
+skinparam sequenceArrowThickness 2
+skinparam noteFontSize 12
+
+== Doble despacho funcionando (OCP05Extendido) ==
+
+Universidad -> Alumno: solicitarBeca(evaluador)
+activate Alumno
+Alumno -> EvaluadorBecas: evaluar(this)
+activate EvaluadorBecas
+EvaluadorBecas --> Alumno
+deactivate EvaluadorBecas
+deactivate Alumno
+
+== AlumnoHonorario: el segundo despacho no ocurre ==
+
+Universidad -> AlumnoHonorario: solicitarBeca(evaluador)
+activate AlumnoHonorario
+note over AlumnoHonorario
+  // los honorarios no
+  // solicitan becas
+end note
+deactivate AlumnoHonorario
+
+@enduml

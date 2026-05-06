@@ -8,6 +8,6 @@ public class AlumnoHonorario extends Alumno {
 
     @Override
     public void solicitarBeca(EvaluadorBecas evaluador) {
-        throw new UnsupportedOperationException("Los alumnos honorarios no solicitan becas");
+        // los alumnos honorarios no solicitan becas
     }
 }

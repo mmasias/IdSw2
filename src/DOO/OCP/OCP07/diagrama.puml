@@ -23,7 +23,7 @@ class AlumnoHonorario {
     + solicitarBeca(evaluador: EvaluadorBecas)
 }
 note right of AlumnoHonorario
-  throw UnsupportedOperationException
+  // los honorarios no solicitan becas
 end note
 
 class EvaluadorAcademico { }
@@ -34,9 +34,6 @@ class EvaluadorInternacional { }
 class Universidad {
     + procesarSolicitudBeca(alumno, evaluador)
 }
-note right of Universidad
-  if (!(alumno instanceof AlumnoHonorario))
-end note
 
 Alumno <|-- AlumnoErasmus
 Alumno <|-- AlumnoVirtual
@@ -51,6 +48,5 @@ EvaluadorDeportes       .u.|> EvaluadorBecas
 EvaluadorInternacional  .u.|> EvaluadorBecas
 
 Alumno ..> EvaluadorBecas
-Universidad ..> AlumnoHonorario : instanceof
 
 @enduml
