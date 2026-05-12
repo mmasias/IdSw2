@@ -1,0 +1,50 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+interface CapacidadEstudio {
+    + estudiar()
+}
+
+class EstudioActivo {
+    + estudiar()
+}
+
+class SinEstudio {
+    + estudiar()
+}
+note right of SinEstudio : sin efecto
+
+interface CapacidadDeportiva {
+    + entrenar()
+}
+
+class DeporteActivo {
+    + entrenar()
+}
+
+class SinDeporte {
+    + entrenar()
+}
+note right of SinDeporte : sin efecto
+
+class Persona {
+    - capacidadEstudio: CapacidadEstudio
+    - capacidadDeportiva: CapacidadDeportiva
+    + estudiar()
+    + entrenar()
+    + matricularse(datos: DatosEstudio)
+    + graduarse()
+    + federarse(datos: DatosDeportivos)
+    + retirarse()
+}
+
+EstudioActivo .u.|> CapacidadEstudio
+SinEstudio    .u.|> CapacidadEstudio
+
+DeporteActivo .u.|> CapacidadDeportiva
+SinDeporte    .u.|> CapacidadDeportiva
+
+Persona o--> CapacidadEstudio
+Persona o--> CapacidadDeportiva
+
+@enduml

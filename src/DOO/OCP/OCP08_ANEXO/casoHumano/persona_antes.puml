@@ -1,0 +1,27 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+class Persona {
+    + estudiar()
+    + entrenar()
+}
+
+class Estudiante {
+    + estudiar()
+}
+
+class Deportista {
+    + entrenar()
+}
+
+class EstudianteDeportista {
+    + estudiar()
+    + entrenar()
+}
+note bottom of EstudianteDeportista : ¿extends Estudiante?\n¿extends Deportista?\n¿extends ambos?
+
+Persona <|-- Estudiante
+Persona <|-- Deportista
+Persona <|-- EstudianteDeportista
+
+@enduml

@@ -1,10 +1,8 @@
 # El pájaro y el pingüino
 
-[OCP08](../OCP08/README.md) resolvió el problema de `AlumnoHonorario` mediante composición. El mismo movimiento resuelve el ejemplo canónico de LSP: el ave que no puede volar.
+Todos los pájaros vuelan. Eso dice la jerarquía. Entonces llega el pingüino, y la jerarquía miente.
 
 ## El estado inicial
-
-Todos los pájaros vuelan. Entonces llega el pingüino.
 
 ```java
 class Ave {
@@ -32,7 +30,7 @@ La alternativa - dejar el cuerpo vacío - es peor: silencio administrativo. El l
 
 ## La solución local
 
-El mismo movimiento que OCP08: extraer la capacidad variable como colaborador.
+La capacidad variable se extrae como colaborador.
 
 ```java
 interface CapacidadVuelo {
