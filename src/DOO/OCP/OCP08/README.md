@@ -42,14 +42,14 @@ Cada subclase configura su capacidad en construcción:
 class AlumnoErasmus extends Alumno {
     AlumnoErasmus(id, nombre, email, paisOrigen, universidadOrigen) {
         super(id, nombre, email)
-        configurarBeca(new CapacidadBecaActiva(...))  // qué lleva dentro: sección siguiente
+        this.configurarBeca(new CapacidadBecaActiva(...))  // qué lleva dentro: sección siguiente
     }
 }
 
 class AlumnoHonorario extends Alumno {
     AlumnoHonorario(id, nombre, email) {
         super(id, nombre, email)
-        configurarBeca(new CapacidadBecaNula())
+        this.configurarBeca(new CapacidadBecaNula())
     }
 }
 ```
@@ -58,7 +58,7 @@ class AlumnoHonorario extends Alumno {
 
 En OCP07, `AlumnoHonorario` sobreescribía `solicitarBeca` con un cuerpo vacío. El comportamiento externo era idéntico: no ocurría nada. Pero el no-op violaba el contrato de `Alumno` (la promesa de que `evaluar` sería invocado) y lo hacía sin dejar rastro. El compilador no decía nada y el sistema tampoco.
 
-Aquí el contrato de `Alumno.solicitarBeca()` es distinto: "la capacidad configurada será ejecutada". Eso siempre se cumple, incluido para `AlumnoHonorario`. No hay violación porque no hay promesa incumplida. La ausencia de efecto no es un silencio sospechoso: está declarada en el tipo que se inyecta. Quien lea `configurarBeca(new CapacidadBecaNula())` sabe exactamente qué decidió el diseñador y por qué.
+Aquí el contrato de `Alumno.solicitarBeca()` es distinto: "la capacidad configurada será ejecutada". Eso siempre se cumple, incluido para `AlumnoHonorario`. No hay violación porque no hay promesa incumplida. La ausencia de efecto no es un silencio sospechoso: está declarada en el tipo que se inyecta. Quien lea `this.configurarBeca(new CapacidadBecaNula())` sabe exactamente qué decidió el diseñador y por qué.
 
 <div align=center>
 
@@ -140,7 +140,7 @@ Cada subclase configura su capacidad con los datos que le son propios:
 class AlumnoErasmus extends Alumno {
     AlumnoErasmus(id, nombre, email, paisOrigen, universidadOrigen) {
         super(id, nombre, email)
-        configurarBeca(new CapacidadBecaActiva(
+        this.configurarBeca(new CapacidadBecaActiva(
             new SolicitudBeca(notaMedia, ingresosFamiliares, esInternacional=true, ...)
         ))
     }

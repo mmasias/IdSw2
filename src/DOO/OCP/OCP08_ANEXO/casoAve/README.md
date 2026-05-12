@@ -1,6 +1,6 @@
 # El pájaro y el pingüino
 
-Todos los pájaros vuelan. Eso dice la jerarquía. Entonces llega el pingüino, y la jerarquía miente.
+Todos los pájaros vuelan. Eso dice la jerarquía. Entonces llega el pingüino y la jerarquía miente.
 
 ## El estado inicial
 
@@ -60,14 +60,14 @@ class Ave {
 class Aguila extends Ave {
     Aguila() {
         super()
-        configurarVuelo(new VueloActivo())
+        this.configurarVuelo(new VueloActivo())
     }
 }
 
 class Pinguino extends Ave {
     Pinguino() {
         super()
-        configurarVuelo(new SinVuelo())
+        this.configurarVuelo(new SinVuelo())
     }
 }
 ```
@@ -96,24 +96,24 @@ class Ave {
 class Ganso extends Ave {        // vuela y nada
     Ganso() {
         super()
-        configurarVuelo(new VueloActivo())
-        configurarNatacion(new NatacionActiva())
+        this.configurarVuelo(new VueloActivo())
+        this.configurarNatacion(new NatacionActiva())
     }
 }
 
 class Pinguino extends Ave {     // nada, no vuela
     Pinguino() {
         super()
-        configurarVuelo(new SinVuelo())
-        configurarNatacion(new NatacionActiva())
+        this.configurarVuelo(new SinVuelo())
+        this.configurarNatacion(new NatacionActiva())
     }
 }
 
 class Avestruz extends Ave {     // no vuela, no nada
     Avestruz() {
         super()
-        configurarVuelo(new SinVuelo())
-        configurarNatacion(new SinNatacion())
+        this.configurarVuelo(new SinVuelo())
+        this.configurarNatacion(new SinNatacion())
     }
 }
 ```
