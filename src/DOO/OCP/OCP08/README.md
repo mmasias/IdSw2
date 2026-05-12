@@ -2,6 +2,14 @@
 
 La tabla de [OCP07](../OCP07/README.md) dejaba tres salidas. El Camino C prometía extraer la capacidad de solicitar beca como pieza componible. Vamos a recorrerlo.
 
+El sistema del que partimos:
+
+<div align=center>
+
+![Sistema con doble despacho](antes.svg)
+
+</div>
+
 ## La solución local
 
 En el diseño anterior, la jerarquía de herencia era el mecanismo para diferenciar comportamiento: cada subclase sobreescribe `solicitarBeca` para que el despacho llegue al evaluador con el tipo correcto. Eso funciona mientras todos los alumnos compartan esa capacidad. Cuando aparece uno que no la tiene, la jerarquía revela que estaba haciendo dos cosas a la vez: modelar el tipo de alumno, y transportar la variación de comportamiento de evaluación.
@@ -52,19 +60,19 @@ En OCP07, `AlumnoHonorario` sobreescribía `solicitarBeca` con un cuerpo vacío.
 
 Aquí el contrato de `Alumno.solicitarBeca()` es distinto: "la capacidad configurada será ejecutada". Eso siempre se cumple, incluido para `AlumnoHonorario`. No hay violación porque no hay promesa incumplida. La ausencia de efecto no es un silencio sospechoso: está declarada en el tipo que se inyecta. Quien lea `configurarBeca(new CapacidadBecaNula())` sabe exactamente qué decidió el diseñador y por qué.
 
+<div align=center>
+
+![Solución local - Null Object](local.svg)
+
+</div>
+
 El problema inmediato de OCP07 está resuelto.
 
 ## El sistema que queda
 
-Pero el doble despacho sigue ahí.
+La solución local resuelve `AlumnoHonorario`. El problema estructural sigue en pie.
 
-<div align=center>
-
-![Sistema con doble despacho](antes.svg)
-
-</div>
-
-Cada subclase de `Alumno` sobreescribe `solicitarBeca` para que `evaluador.evaluar(this)` resuelva la sobrecarga correcta. `EvaluadorBecas` declara un método por tipo de alumno. Cada evaluador concreto los implementa todos.
+`CapacidadBecaActiva` necesita invocar al evaluador. La implementación natural reproduciría el doble despacho en su interior: `evaluador.evaluar(alumnoErasmus)` en una, `evaluador.evaluar(alumnoInvestigador)` en otra. `EvaluadorBecas` seguiría declarando un método por tipo de alumno. Cada evaluador concreto los implementaría todos.
 
 El coste se vuelve visible cuando el sistema crece:
 

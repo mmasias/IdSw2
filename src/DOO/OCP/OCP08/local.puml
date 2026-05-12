@@ -1,0 +1,62 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+interface CapacidadBeca {
+    + solicitar(evaluador: EvaluadorBecas)
+}
+
+class CapacidadBecaActiva {
+    + solicitar(evaluador: EvaluadorBecas)
+}
+
+class CapacidadBecaNula {
+    + solicitar(evaluador: EvaluadorBecas)
+}
+note right of CapacidadBecaNula : sin efecto
+
+interface EvaluadorBecas {
+    + evaluar(alumno: Alumno)
+    + evaluar(alumnoErasmus: AlumnoErasmus)
+    + evaluar(alumnoVirtual: AlumnoVirtual)
+    + evaluar(alumnoInvestigador: AlumnoInvestigador)
+    + evaluar(alumnoDeportista: AlumnoDeportista)
+    + evaluar(alumnoDiscapacidad: AlumnoDiscapacidad)
+}
+
+class Alumno {
+    - capacidadBeca: CapacidadBeca
+    + solicitarBeca(evaluador: EvaluadorBecas)
+}
+
+class AlumnoErasmus { }
+class AlumnoVirtual { }
+class AlumnoInvestigador { }
+class AlumnoDeportista { }
+class AlumnoDiscapacidad { }
+class AlumnoHonorario { }
+
+class EvaluadorAcademico { }
+class EvaluadorSocioeconomico { }
+class EvaluadorDeportes { }
+class EvaluadorInternacional { }
+
+CapacidadBecaActiva  .u.|> CapacidadBeca
+CapacidadBecaNula    .u.|> CapacidadBeca
+
+Alumno <|-- AlumnoErasmus
+Alumno <|-- AlumnoVirtual
+Alumno <|-- AlumnoInvestigador
+Alumno <|-- AlumnoDeportista
+Alumno <|-- AlumnoDiscapacidad
+Alumno <|-- AlumnoHonorario
+
+Alumno o--> CapacidadBeca
+
+CapacidadBecaActiva ..> EvaluadorBecas
+
+EvaluadorAcademico      .u.|> EvaluadorBecas
+EvaluadorSocioeconomico .u.|> EvaluadorBecas
+EvaluadorDeportes       .u.|> EvaluadorBecas
+EvaluadorInternacional  .u.|> EvaluadorBecas
+
+@enduml
