@@ -1,0 +1,56 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+interface CapacidadVuelo {
+    + volar()
+}
+
+class VueloActivo {
+    + volar()
+}
+
+class SinVuelo {
+    + volar()
+}
+note right of SinVuelo : sin efecto
+
+interface CapacidadNatacion {
+    + nadar()
+}
+
+class NatacionActiva {
+    + nadar()
+}
+
+class SinNatacion {
+    + nadar()
+}
+note right of SinNatacion : sin efecto
+
+class Ave {
+    - capacidadVuelo: CapacidadVuelo
+    - capacidadNatacion: CapacidadNatacion
+    + volar()
+    + nadar()
+}
+
+class Aguila { }
+class Pinguino { }
+class Ganso { }
+class Avestruz { }
+
+VueloActivo    .u.|> CapacidadVuelo
+SinVuelo       .u.|> CapacidadVuelo
+
+NatacionActiva .u.|> CapacidadNatacion
+SinNatacion    .u.|> CapacidadNatacion
+
+Ave <|-- Aguila
+Ave <|-- Pinguino
+Ave <|-- Ganso
+Ave <|-- Avestruz
+
+Ave o--> CapacidadVuelo
+Ave o--> CapacidadNatacion
+
+@enduml

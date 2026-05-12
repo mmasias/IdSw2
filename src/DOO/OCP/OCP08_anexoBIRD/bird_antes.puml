@@ -1,0 +1,24 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+class Ave {
+    + volar()
+}
+
+class Aguila { }
+
+class Pinguino {
+    + volar()
+}
+note right of Pinguino : throw UnsupportedOperationException
+
+class Avestruz {
+    + volar()
+}
+note right of Avestruz : throw UnsupportedOperationException
+
+Ave <|-- Aguila
+Ave <|-- Pinguino
+Ave <|-- Avestruz
+
+@enduml
