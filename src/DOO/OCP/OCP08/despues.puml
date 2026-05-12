@@ -1,0 +1,54 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+interface CapacidadBeca {
+    + solicitar(evaluador: EvaluadorBecas)
+}
+
+class CapacidadBecaActiva {
+    + solicitar(evaluador: EvaluadorBecas)
+}
+
+class CapacidadBecaNula {
+    + solicitar(evaluador: EvaluadorBecas)
+}
+note right of CapacidadBecaNula : sin efecto
+
+class SolicitudBeca {
+    + notaMedia: double
+    + ingresosFamiliares: double
+    + esInternacional: boolean
+    + tieneDiscapacidad: boolean
+}
+
+interface EvaluadorBecas {
+    + evaluar(solicitud: SolicitudBeca)
+}
+
+class Alumno {
+    - capacidadBeca: CapacidadBeca
+    + solicitarBeca(evaluador: EvaluadorBecas)
+}
+
+class AlumnoErasmus { }
+class AlumnoHonorario { }
+
+class EvaluadorAcademico { }
+class EvaluadorSocioeconomico { }
+
+CapacidadBecaActiva  .u.|> CapacidadBeca
+CapacidadBecaNula    .u.|> CapacidadBeca
+
+Alumno <|-- AlumnoErasmus
+Alumno <|-- AlumnoHonorario
+
+Alumno o--> CapacidadBeca
+
+CapacidadBecaActiva ..> SolicitudBeca : construye
+
+EvaluadorAcademico      .u.|> EvaluadorBecas
+EvaluadorSocioeconomico .u.|> EvaluadorBecas
+
+EvaluadorBecas ..> SolicitudBeca
+
+@enduml
