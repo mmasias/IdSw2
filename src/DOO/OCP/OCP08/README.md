@@ -74,6 +74,26 @@ La solución local resuelve `AlumnoHonorario`. El problema estructural sigue en 
 
 `CapacidadBecaActiva` necesita invocar al evaluador. La implementación natural reproduciría el doble despacho en su interior: `evaluador.evaluar(alumnoErasmus)` en una, `evaluador.evaluar(alumnoInvestigador)` en otra. `EvaluadorBecas` seguiría declarando un método por tipo de alumno. Cada evaluador concreto los implementaría todos.
 
+```java
+class CapacidadBecaActivaErasmus implements CapacidadBeca {
+    private AlumnoErasmus alumno
+
+    void solicitar(EvaluadorBecas evaluador) {
+        evaluador.evaluar(alumno)   // sobrecarga de AlumnoErasmus
+    }
+}
+
+class CapacidadBecaActivaInvestigador implements CapacidadBeca {
+    private AlumnoInvestigador alumno
+
+    void solicitar(EvaluadorBecas evaluador) {
+        evaluador.evaluar(alumno)   // sobrecarga de AlumnoInvestigador
+    }
+}
+```
+
+Una subclase por tipo de alumno. El doble despacho no desapareció: se desplazó a `CapacidadBeca`. Las jerarquías paralelas reaparecen en otro lugar.
+
 El coste se vuelve visible cuando el sistema crece:
 
 - Añadir un tipo de alumno: crear la subclase, añadir su sobrecarga en `EvaluadorBecas`, implementarla en cada evaluador concreto. El cambio se propaga.
