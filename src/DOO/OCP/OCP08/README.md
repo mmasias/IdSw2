@@ -243,7 +243,10 @@ El diseño no sabe qué sistema se está construyendo. El dominio sí.
 
 **Inversión de Control**. En el diseño anterior, `Universidad` controlaba el flujo: llamaba a `alumno.solicitarBeca()` sabiendo implícitamente qué ocurriría según el tipo. En el rediseño, `Universidad` sigue llamando a `solicitarBeca()`, pero ya no controla qué pasa dentro - ese control lo tiene la `CapacidadBeca` inyectada. El cliente llama; la implementación decide. Es el Principio Hollywood: *"No me llames, ya te llamaremos"*.
 
-La Inversión de Control tiene dos formas en OO. Con herencia: la clase base define el esqueleto y las subclases rellenan los pasos (Patrón Método Plantilla). Con composición: la clase delega en un colaborador inyectado (Strategy). El hilo OCP ha recorrido las dos.
+La Inversión de Control tiene dos formas en OO: 
+
+- Con herencia: la clase base define el esqueleto y las subclases rellenan los pasos (Patrón Método Plantilla).
+- Con composición: la clase delega en un colaborador inyectado (Strategy). El hilo OCP ha recorrido las dos.
 
 Ya se vio en la práctica: [`Mazo.mostrar()`](https://github.com/mmasias/23-24-pyKlondike/blob/toHeirIsHuman/src/Mazo.java) define el esqueleto del algoritmo - imprime el título, comprueba si hay cartas, delega en `mostrarContenido()`. Cada subclase rellena ese paso. El cliente llama a `mostrar()`; la subclase decide qué ocurre en el interior.
 
