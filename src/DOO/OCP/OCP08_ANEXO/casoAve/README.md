@@ -205,4 +205,18 @@ Esto es lo que se conoce como **segregación de interfaces**
 | **Polimorfismo** | Alto (Tratados todos bajo el tipo Ave). | Bajo (Tratados bajo roles específicos Volador). |
 | **Complejidad** | Crece en número de objetos creados. | Crece en combinaciones de interfaces. |
 
+## Compromisos
+
+### Rediseño 1
+
+- Este enfoque prioriza la cohesión del dominio biológico: un pingüino sigue siendo semánticamente un Ave y comparte todo el ciclo de vida o atributos comunes del grupo.
+- ***Cuándo es la solución correcta***: Si el sistema opera con listas genéricas (List<Ave> o listas con Nodos tipo Ave). Por ejemplo, un motor de simulación ecológica que necesita iterar por todos los animales del ecosistema y ejecutar ave.actualizarEstado().
+- ***El riesgo real***: El "silencio administrativo": si es un sistema de control de tráfico aéreo para aves, invocar volar() en un pingüino y que no haga nada puede causar comportamientos inesperados en las variables físicas del entorno del juego o simulación.
+
+### Rediseño 2
+
+- Este enfoque prioriza la seguridad del sistema de tipos y la experiencia del desarrollador que consume las clases.
+- ***Cuándo es la solución correcta***: Si el vuelo es un comportamiento crítico del negocio. Al eliminar volar() de la interfaz pública de Pinguino, el compilador se convierte en el validador de reglas de negocio. Evitas errores en tiempo de ejecución de raíz.
+- ***El riesgo real***: Fragmentación del polimorfismo. De haber una función que procese animales en el cielo, tendrá parámetros del tipo Volador. Si dentro de esa función se necesita saber la especie o acceder a métodos de Ave (como comer()), le obliga a realizar castings forzados ((Ave) animal), rompiendo otros principios de diseño.
+
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
