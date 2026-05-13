@@ -128,4 +128,72 @@ Añadir un nuevo tipo de ave es configurar combinaciones existentes. Añadir una
 
 La herencia modela lo que todas las aves comparten: identidad, ciclo de vida. La composición modela lo que varía: qué puede hacer cada una.
 
+## Una segunda propuesta de rediseño
+
+Aunque la propuesta anterior cumple Liskov matemáticamente, un programador ajeno al código podría sorprenderse si invoca pinguino.volar() y el objeto se queda quieto en silencio.
+
+Entonces, una solución semántica alternativa sería pensar que si el sistema requiere que los pingüinos explícitamente no tengan la opción de volar en su interfaz pública evitemos realmente que el método volar() exista en absoluto para el pingüino.
+
+
+```java
+interface Volador {
+    void volar();
+}
+
+interface Nadador {
+    void nadar();
+}
+
+interface Caminador {
+    void caminar();
+}
+
+// Clase base con características verdaderamente comunes a TODAS las aves
+class Ave {
+    void comer() {
+        // Todas las aves comen
+    }
+}
+
+// Implementaciones concretas combinando solo lo que necesitan
+class Aguila extends Ave implements Volador, Caminador {
+    @Override
+    public void volar() {
+        // Lógica de vuelo activo o uso de Strategy (VueloActivo)
+    }
+
+    @Override
+    public void caminar() {
+        // Caminar por el suelo
+    }
+}
+
+class Pinguino extends Ave implements Nadador, Caminador {
+    @Override
+    public void nadar() {
+        // Lógica para nadar bajo el agua
+    }
+
+    @Override
+    public void caminar() {
+        // Caminar torpemente
+    }
+}
+
+```
+
+Y luego, un cliente que simule el cielo, solo puede hacer despegar a quien puede volar:
+
+```java
+
+class SimuladorDeCielo {
+    void hacerDespegar(Volador animal) {
+        animal.volar(); // Totalmente seguro, un Pinguino no puede entrar aquí
+    }
+}
+
+```
+
+Esto es lo que se conoce como **segregación de interfaces**
+
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
