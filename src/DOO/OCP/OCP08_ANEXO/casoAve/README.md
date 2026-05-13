@@ -196,4 +196,13 @@ class SimuladorDeCielo {
 
 Esto es lo que se conoce como **segregación de interfaces**
 
+## Comparativa
+
+| Criterio | Rediseño 1: Composición (Strategy) | Rediseño 2: Segregación (ISP) |
+|---|---|---|
+| **Principal fortaleza** | Manejo masivo de colecciones homogeneas. | Máxima seguridad en tiempo de compilación. |
+| **Punto ciego** | Sorpresa semántica (Null Object silencioso). | Pérdida de una superclase útil común (Ave). |
+| **Polimorfismo** | Alto (Tratados todos bajo el tipo Ave). | Bajo (Tratados bajo roles específicos Volador). |
+| **Complejidad** | Crece en número de objetos creados. | Crece en combinaciones de interfaces. |
+
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
